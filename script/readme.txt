@@ -25,8 +25,8 @@ kubectl get svc -o wide
 
 PS C:\intelij_workspace\config-server\k8s> minikube service --all
 
-"PS C:\intelij_workspace\config-server\k8s> Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass"
-- 1_deploy_service.ps1 (배포, powershell로 실행)
+"PS C:\intelij_workspace\config-server\k8s> Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass" (powershell로 실행)
+- 1_deploy_service.ps1 (배포)
 - 2_health_check.ps1 (점검)
 - 3_redeploy_services.ps1 (재배포)
 - 4. undeploy_services.ps1 (삭제)
