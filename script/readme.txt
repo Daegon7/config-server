@@ -34,3 +34,7 @@ PS C:\intelij_workspace\config-server\k8s> minikube service --all
 http://127.0.0.1:50185/           (eureka 서버)
 http://127.0.0.1:50189/users/a123 (users 서버)
 http://127.0.0.1:50181/users/a123 (gateway 서버 -> Front 서버 단에서 호출)
+
+4. 로컬 배포 시
+user-service 서버의 application.properties 파일 수정 (Local, Minikube)
+api-gateway  서버의 application.properties 파일 수정 (Local, Minikube)
