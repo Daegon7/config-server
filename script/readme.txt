@@ -9,6 +9,9 @@ docker push daegon7/msa-eureka-app
 docker build -t daegon7/msa-user-app .
 docker push daegon7/msa-user-app
 
+docker build -t daegon7/msa-restapi-app .
+docker push daegon7/msa-restapi-app
+
 docker build -t daegon7/msa-gateway-app .
 docker push daegon7/msa-gateway-app
 
