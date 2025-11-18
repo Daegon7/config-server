@@ -1,17 +1,44 @@
 #!/bin/bash
 
-echo "🛑 Stopping services..."
+echo "🛑 Stopping selected services..."
 
-# ssh 포트포워딩 프로세스 종료
-pids=$(pgrep -f "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o IdentitiesOnly=yes -N docker@127.0.0.1")
+# config-server (8888)
+pids=$(pgrep -f "ssh .*:8888")
 if [ -n "$pids" ]; then
-  echo "Stopping ssh tunnel processes (PID: $pids)..."
+  echo "Stopping config-server tunnel (PID: $pids)..."
   kill -9 $pids
 else
-  echo "✅ no ssh tunnel processes running"
+  echo "✅ config-server not running"
 fi
 
-# api-gateway port-forward 종료
+# eureka-server (8761)
+pids=$(pgrep -f "ssh .*:8761")
+if [ -n "$pids" ]; then
+  echo "Stopping eureka-server tunnel (PID: $pids)..."
+  kill -9 $pids
+else
+  echo "✅ eureka-server not running"
+fi
+
+# restapi-service (8082)
+pids=$(pgrep -f "ssh .*:8082")
+if [ -n "$pids" ]; then
+  echo "Stopping restapi-service tunnel (PID: $pids)..."
+  kill -9 $pids
+else
+  echo "✅ restapi-service not running"
+fi
+
+# user-service (8081)
+pids=$(pgrep -f "ssh .*:8081")
+if [ -n "$pids" ]; then
+  echo "Stopping user-service tunnel (PID: $pids)..."
+  kill -9 $pids
+else
+  echo "✅ user-service not running"
+fi
+
+# api-gateway port-forward (8000 → 5000)
 pids=$(pgrep -f "kubectl port-forward svc/api-gateway 5000:8000")
 if [ -n "$pids" ]; then
   echo "Stopping api-gateway port-forward (PID: $pids)..."
@@ -20,4 +47,4 @@ else
   echo "✅ api-gateway port-forward not running"
 fi
 
-echo "🎉 All services stopped!"
+echo "🎉 Selected services stopped!"
