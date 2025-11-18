@@ -41,3 +41,7 @@ http://127.0.0.1:50181/users/a123 (gateway 서버 -> Front 서버 단에서 호�
 4. 로컬 배포 시
 user-service 서버의 application.properties 파일 수정 (Local, Minikube)
 api-gateway  서버의 application.properties 파일 수정 (Local, Minikube)
+
+
+실행권한 추가
+chmod +x /mac/deploy_services.sh
