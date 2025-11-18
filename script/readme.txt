@@ -48,3 +48,22 @@ chmod +x /mac/deploy_services.sh
 
 minikube 터널 실행
 minikube service restapi-service api-gateway
+
+Postman에서 curl 요청 옮기기
+1. 새 요청 만들기
+Postman 실행 → New → HTTP Request 선택
+2. 메서드와 URL 입력
+상단에서 GET 선택
+URL 입력:
+코드
+http://127.0.0.1:64494/user/profile
+3. Headers 설정
+Headers 탭에서 아래 값 추가:
+accept : */*
+Authorization :
+코드
+Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdHJpbmciLCJleHAiOjE3NjM0MzE4NTN9.Paauxh9LUdl5OU8_cOyw6N1sW2PNr5zK9lubsPM7nEQ
+4. Body는 필요 없음
+GET 요청이라 Body는 비워둡니다.
+5. 실행
+Send 버튼 클릭 → 응답(Response) 확인
