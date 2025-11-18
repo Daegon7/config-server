@@ -1,29 +1,21 @@
 #!/bin/bash
 
-#chmod +x stop-services.sh
-
-# 종료할 서비스 목록
-services=("config-server" "eureka-server" "restapi-service" "user-service")
-
 echo "🛑 Stopping services..."
 
-# minikube service 터널 종료
-for svc in "${services[@]}"; do
-  # 해당 서비스 프로세스 찾기
-  pid=$(ps -ef | grep "minikube service $svc" | grep -v grep | awk '{print $2}')
-  if [ -n "$pid" ]; then
-    echo "Stopping $svc (PID: $pid)..."
-    kill -9 $pid
-  else
-    echo "✅ $svc not running"
-  fi
-done
+# ssh 포트포워딩 프로세스 종료
+pids=$(pgrep -f "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o IdentitiesOnly=yes -N docker@127.0.0.1")
+if [ -n "$pids" ]; then
+  echo "Stopping ssh tunnel processes (PID: $pids)..."
+  kill -9 $pids
+else
+  echo "✅ no ssh tunnel processes running"
+fi
 
 # api-gateway port-forward 종료
-pid=$(ps -ef | grep "kubectl port-forward svc/api-gateway 5000:8000" | grep -v grep | awk '{print $2}')
-if [ -n "$pid" ]; then
-  echo "Stopping api-gateway port-forward (PID: $pid)..."
-  kill -9 $pid
+pids=$(pgrep -f "kubectl port-forward svc/api-gateway 5000:8000")
+if [ -n "$pids" ]; then
+  echo "Stopping api-gateway port-forward (PID: $pids)..."
+  kill -9 $pids
 else
   echo "✅ api-gateway port-forward not running"
 fi
