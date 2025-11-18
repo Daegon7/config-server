@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#chmod +x start-services.sh
-
 # 서비스 실행 여부 확인 함수
 is_service_running() {
   local svc_name=$1
