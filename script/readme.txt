@@ -45,3 +45,6 @@ api-gateway  서버의 application.properties 파일 수정 (Local, Minikube)
 
 실행권한 추가
 chmod +x /mac/deploy_services.sh
+
+minikube 터널 실행
+minikube service restapi-service api-gateway
